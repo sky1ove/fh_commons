@@ -35,5 +35,3 @@ def test():
     return df2html(df)
 
 ```
-
-    2
