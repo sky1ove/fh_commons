@@ -6,7 +6,7 @@
 __all__ = ['bootstrap_hdrs', 'datatable_hdrs', 'cond_pico_hdrs', 'copy_js', 'autocomplete_js', 'download_js', 's', 'start_ngrok',
            'htmx', 'p']
 
-# %% ../nbs/00_core.ipynb 4
+# %% ../nbs/00_core.ipynb 3
 from fasthtml.common import *
 from fasthtml.jupyter import *
 from IPython.display import HTML
@@ -18,14 +18,14 @@ from IPython import get_ipython
 from IPython.core.magic import register_cell_magic
 import ast
 
-# %% ../nbs/00_core.ipynb 7
+# %% ../nbs/00_core.ipynb 6
 def bootstrap_hdrs(include_icon=True):
     css = Link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css', rel='stylesheet')
     js = Script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js')
     icon = Link(href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css', rel='stylesheet')
     return [css,js,icon] if include_icon else [css,js]
 
-# %% ../nbs/00_core.ipynb 9
+# %% ../nbs/00_core.ipynb 8
 def datatable_hdrs():
     dt_s1 = Script(src='https://code.jquery.com/jquery-3.7.1.js')
     dt_s2 = Script(src='https://cdn.datatables.net/2.1.5/js/dataTables.js')
@@ -34,28 +34,28 @@ def datatable_hdrs():
     dt_c2 = Link(rel='stylesheet',href='https://cdn.datatables.net/2.1.5/css/dataTables.bootstrap5.css')
     return [dt_s1,dt_s2,dt_s3,dt_c1,dt_c2]
 
-# %% ../nbs/00_core.ipynb 11
+# %% ../nbs/00_core.ipynb 10
 def cond_pico_hdrs():
     conditional_pico = Link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css')
     return [conditional_pico]
 
-# %% ../nbs/00_core.ipynb 13
+# %% ../nbs/00_core.ipynb 12
 def copy_js():
     script_copy_button=Script(src="./imports/copy_button.js")
     return [script_copy_button]
 
-# %% ../nbs/00_core.ipynb 15
+# %% ../nbs/00_core.ipynb 14
 def autocomplete_js():
     jquery = Script(src='https://code.jquery.com/jquery-3.6.0.min.js')
     script_autocomplete = Script(src='./imports/autocomplete.js')
     return [jquery,script_autocomplete]
 
-# %% ../nbs/00_core.ipynb 17
+# %% ../nbs/00_core.ipynb 16
 def download_js():
     download_script = Script(src='./imports/download_csv_svg.js')
     return [download_script]
 
-# %% ../nbs/00_core.ipynb 20
+# %% ../nbs/00_core.ipynb 19
 @register_cell_magic
 def s(line, cell):
     # Parse the line argument to check for a 'debug' flag
@@ -90,7 +90,7 @@ def s(line, cell):
     # Execute the modified code
     get_ipython().run_cell(modified_code)
 
-# %% ../nbs/00_core.ipynb 25
+# %% ../nbs/00_core.ipynb 24
 def start_ngrok(token,port=8000):
     
     # Get token from ngrok.com --> login --> Your Authtoken
@@ -102,7 +102,7 @@ def start_ngrok(token,port=8000):
     # Return the public URL
     return ngrok_tunnel.public_url
 
-# %% ../nbs/00_core.ipynb 30
+# %% ../nbs/00_core.ipynb 28
 def htmx(url,path='',height='auto'):
     "An iframe which displays the HTMX application in a notebook."
     return HTML(f'<iframe src="{url}{str(path)}" style="width: 100%; height: {height}; border: none;" ' + """onload="{
@@ -112,7 +112,7 @@ def htmx(url,path='',height='auto'):
         }, false);
     }" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write; display-capture; encrypted-media; fullscreen; gamepad; geolocation; gyroscope; hid; identity-credentials-get; idle-detection; magnetometer; microphone; midi; payment; picture-in-picture; publickey-credentials-get; screen-wake-lock; serial; usb; web-share; xr-spatial-tracking"></iframe> """)
 
-# %% ../nbs/00_core.ipynb 43
+# %% ../nbs/00_core.ipynb 35
 @register_cell_magic
 def p(line, cell):
     # Parse the line argument to check for a 'debug' flag

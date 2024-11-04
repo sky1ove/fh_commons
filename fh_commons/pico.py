@@ -3,11 +3,11 @@
 # %% auto 0
 __all__ = ['Navbar', 'get_accordian']
 
-# %% ../nbs/05_pico.ipynb 5
+# %% ../nbs/05_pico.ipynb 4
 from fasthtml.common import *
 from .core import *
 
-# %% ../nbs/05_pico.ipynb 9
+# %% ../nbs/05_pico.ipynb 8
 def Navbar(page):
     "Pico nav bar"
     return Nav(
@@ -16,7 +16,7 @@ def Navbar(page):
           Li(A(page, href='#'))),
         aria_label='breadcrumb')
 
-# %% ../nbs/05_pico.ipynb 12
+# %% ../nbs/05_pico.ipynb 11
 def get_accordian(title,context):
     "clickable expand"
     return Details(Summary(title),P(context))

@@ -4,43 +4,41 @@
 __all__ = ['blank', 'border', 'df2html', 'format_input', 'Pico', 'Pico_Titled', 'get_nav', 'NavTitled', 'get_tab',
            'get_accordian', 'download_button', 'get_card']
 
-# %% ../nbs/01_static.ipynb 4
+# %% ../nbs/01_static.ipynb 3
 from fasthtml.common import *
 from fasthtml.jupyter import *
 import pandas as pd
 from .core import *
 
-from ngrok_token import *
-
-# %% ../nbs/01_static.ipynb 10
+# %% ../nbs/01_static.ipynb 9
 def blank(height=50):
   return Div(style=f'height:{height}px')
 
-# %% ../nbs/01_static.ipynb 14
+# %% ../nbs/01_static.ipynb 13
 def border(height=None):
     style = f'height:{height}px' if height else ''
     return Div(cls='border-bottom', style=style)
 
-# %% ../nbs/01_static.ipynb 17
+# %% ../nbs/01_static.ipynb 16
 def df2html(df,cls='table table-striped',id = None,**kwargs):
     "bootstrap striped tables"
     return NotStr(df.to_html(index=False,border=0,classes=cls,justify='left',table_id=id,**kwargs))
 
-# %% ../nbs/01_static.ipynb 21
+# %% ../nbs/01_static.ipynb 20
 def format_input(txt,upper=True):
     return txt.replace(" ", "").upper() if upper else txt.replace(" ", "")
 
-# %% ../nbs/01_static.ipynb 24
+# %% ../nbs/01_static.ipynb 23
 def Pico(*args,cls='pico',**kwargs):
     "Pico conditional Div"
     return Div(*args,cls=cls,**kwargs)
 
-# %% ../nbs/01_static.ipynb 27
+# %% ../nbs/01_static.ipynb 26
 def Pico_Titled(title, *args,cls="container",**kwargs):
     "Pico titled with everything else unPico"
     return Title(title), Main(Pico(H2(title)), *args, cls=cls, **kwargs)
 
-# %% ../nbs/01_static.ipynb 30
+# %% ../nbs/01_static.ipynb 29
 def get_nav(title,href='#'):
     return Nav(
         Div(
@@ -48,12 +46,12 @@ def get_nav(title,href='#'):
             cls='container-fluid'),
         cls='navbar bg-body-tertiary')
 
-# %% ../nbs/01_static.ipynb 33
+# %% ../nbs/01_static.ipynb 32
 def NavTitled(navbar, title, *args,cls="container", **kwargs):
     "Navbar + Pico titled with everything else unPico"
     return Title(title), Main(navbar,Div(blank(30),Pico(H2(title)), *args, cls=cls), **kwargs)
 
-# %% ../nbs/01_static.ipynb 36
+# %% ../nbs/01_static.ipynb 35
 def get_tab(data_dict, prefix=''):
     """Create a bootstrap tab structure with optional prefix for unique IDs and handle spaces in tab names"""
     lis = []
@@ -94,7 +92,7 @@ def get_tab(data_dict, prefix=''):
 
     return Div(tab, content, cls='tab-container')
 
-# %% ../nbs/01_static.ipynb 39
+# %% ../nbs/01_static.ipynb 38
 def get_accordian(data_dict):
     "Bootstrap accordian"
     accordians=[]
@@ -117,7 +115,7 @@ def get_accordian(data_dict):
         accordians.append(accordian)
     return Div(*accordians, id='accordionExample', cls='accordion')
 
-# %% ../nbs/01_static.ipynb 42
+# %% ../nbs/01_static.ipynb 41
 def download_button(*args, **kwargs):
     return Button(
           I(cls='bi bi-download'),
@@ -125,7 +123,7 @@ def download_button(*args, **kwargs):
           cls='btn btn-outline-secondary btn-sm',
           **kwargs)
 
-# %% ../nbs/01_static.ipynb 45
+# %% ../nbs/01_static.ipynb 44
 def get_card(img_pth,title,description,link="#",img_height=200,txt_height=150,card_width=22):
     "Card with link; make sure outside Div has cls = 'row'"
 

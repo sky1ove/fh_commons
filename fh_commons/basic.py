@@ -3,19 +3,17 @@
 # %% auto 0
 __all__ = ['get_file_input', 'bytes2df', 'get_page_index', 'modal_content', 'modal_form', 'modal_link', 'get_select']
 
-# %% ../nbs/02_basic.ipynb 4
+# %% ../nbs/02_basic.ipynb 3
 from fasthtml.common import *
 from fasthtml.jupyter import *
 
 from .core import *
 from .static import *
 
-from ngrok_token import *
-
 import json
 import pandas as pd
 
-# %% ../nbs/02_basic.ipynb 51
+# %% ../nbs/02_basic.ipynb 50
 def get_file_input(label_text,id,**kwargs):
     return Form(
         Label(label_text, fr=id, cls='form-label'),
@@ -23,7 +21,7 @@ def get_file_input(label_text,id,**kwargs):
         **kwargs
     )
 
-# %% ../nbs/02_basic.ipynb 54
+# %% ../nbs/02_basic.ipynb 53
 def bytes2df(bytes_data,file_type):
     if file_type == "csv":
         data_io = StringIO(bytes_data.decode("utf-8"))
@@ -32,7 +30,7 @@ def bytes2df(bytes_data,file_type):
         data_io = BytesIO(bytes_data)
         return pd.read_excel(data_io)
 
-# %% ../nbs/02_basic.ipynb 63
+# %% ../nbs/02_basic.ipynb 62
 def get_page_index(current_page, total_items, items_per_page=12):
     "Get start index and end index given the current page number"
     
@@ -45,7 +43,7 @@ def get_page_index(current_page, total_items, items_per_page=12):
     
     return start_index, end_index,total_pages
 
-# %% ../nbs/02_basic.ipynb 72
+# %% ../nbs/02_basic.ipynb 71
 def modal_content(title, *args):
     return Div(
         Div(
@@ -60,7 +58,7 @@ def modal_content(title, *args):
         cls='modal-dialog modal-xl'
     )
 
-# %% ../nbs/02_basic.ipynb 76
+# %% ../nbs/02_basic.ipynb 75
 def modal_form(*form_content,post, btn_text='Search',cls=None,target_id='modals-window'):
     "Reference: https://htmx.org/examples/modal-bootstrap/"
     modal_button = Form(*form_content, # Input(type='text',id='ssss')
@@ -87,7 +85,7 @@ def modal_form(*form_content,post, btn_text='Search',cls=None,target_id='modals-
     )
     return modal_button, modal_content
 
-# %% ../nbs/02_basic.ipynb 80
+# %% ../nbs/02_basic.ipynb 79
 def modal_link(text,post,cls=None,target_id='modals-window'):
     "Reference: https://htmx.org/examples/modal-bootstrap/"
     modal_button = A(text,
@@ -111,7 +109,7 @@ def modal_link(text,post,cls=None,target_id='modals-window'):
     )
     return modal_button, modal_content
 
-# %% ../nbs/02_basic.ipynb 91
+# %% ../nbs/02_basic.ipynb 90
 def get_select(label_text,option_list,id,cls=None, **kwargs):
     "The first item in the option_list is the default"
     return Div(
