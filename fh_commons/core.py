@@ -2,7 +2,7 @@
 
 # %% auto 0
 __all__ = ['bootstrap_hdrs', 'datatable_hdrs', 'cond_pico_hdrs', 'copy_js', 'autocomplete_js', 'download_js', 's', 'start_ngrok',
-           'htmx', 'p']
+           'kill_ngrok', 'htmx', 'p']
 
 # %% ../nbs/00_core.ipynb 3
 from fasthtml.common import *
@@ -96,11 +96,20 @@ def start_ngrok(token,port=8000):
     
     # Start a tunnel on port
     ngrok_tunnel = ngrok.connect(port)
+
+    public_url = ngrok_tunnel.public_url
+    print(f"ngrok tunnel opened at: {public_url}")
     
     # Return the public URL
-    return ngrok_tunnel.public_url
+    return public_url
 
-# %% ../nbs/00_core.ipynb 28
+# %% ../nbs/00_core.ipynb 25
+def kill_ngrok():
+    "Disconnect the specified ngrok url"
+    ngrok.kill()
+    print("ngrok tunnel killed")
+
+# %% ../nbs/00_core.ipynb 29
 def htmx(url,path='',height='auto'):
     "An iframe which displays the HTMX application in a notebook."
     return HTML(f'<iframe src="{url}{str(path)}" style="width: 100%; height: {height}; border: none;" ' + """onload="{

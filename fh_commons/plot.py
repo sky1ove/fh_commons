@@ -15,7 +15,7 @@ import json
 import numpy as np, pandas as pd, seaborn as sns
 from matplotlib import pyplot as plt
 
-# %% ../nbs/03_plot_and_table.ipynb 10
+# %% ../nbs/03_plot_and_table.ipynb 9
 def fh_svg(func):
     "svg to fasthtml item"
     def wrapper(*args, **kwargs):
@@ -31,7 +31,7 @@ def fh_svg(func):
         return NotStr(svg_data)
     return wrapper
 
-# %% ../nbs/03_plot_and_table.ipynb 13
+# %% ../nbs/03_plot_and_table.ipynb 12
 @fh_svg
 def plot_heatmap(df, # a matrix of values
      title: str='heatmap', # title of the heatmap
@@ -48,7 +48,7 @@ def plot_heatmap(df, # a matrix of values
     plt.ylabel('')
     plt.title(title)
 
-# %% ../nbs/03_plot_and_table.ipynb 17
+# %% ../nbs/03_plot_and_table.ipynb 16
 @fh_svg
 def plot_bar(df,title='Bar plot',figsize=(4,4)):
     df.plot.barh(legend=False,figsize=figsize)
@@ -56,15 +56,15 @@ def plot_bar(df,title='Bar plot',figsize=(4,4)):
     plt.ylabel('')
     plt.title(title)
 
-# %% ../nbs/03_plot_and_table.ipynb 21
+# %% ../nbs/03_plot_and_table.ipynb 20
 def download_svg( *args, txt=' Plot',**kwargs):
     return download_button(txt, *args, onclick='downloadSVG(this)',**kwargs)
 
-# %% ../nbs/03_plot_and_table.ipynb 27
+# %% ../nbs/03_plot_and_table.ipynb 26
 def download_table(*args, **kwargs):
     return download_button(*args, onclick='downloadTableAsCSV(this)',**kwargs)
 
-# %% ../nbs/03_plot_and_table.ipynb 32
+# %% ../nbs/03_plot_and_table.ipynb 31
 def send_df(df,fname, href, button=download_button(' Data')):
     json_data = df.to_json(orient='records')
     return Form(
@@ -75,7 +75,7 @@ def send_df(df,fname, href, button=download_button(' Data')):
         action=href,
         style='display:inline;')
 
-# %% ../nbs/03_plot_and_table.ipynb 33
+# %% ../nbs/03_plot_and_table.ipynb 32
 def download_df(dataframe,fname):
     data_dict = json.loads(dataframe)
     df = pd.DataFrame(data_dict)
@@ -86,7 +86,7 @@ def download_df(dataframe,fname):
     }
     return Response(csv_string, media_type='text/csv', headers=headers)
 
-# %% ../nbs/03_plot_and_table.ipynb 38
+# %% ../nbs/03_plot_and_table.ipynb 37
 def dynamic_table(df,id='dynamic_table', cls='table table-striped',):
     "Dynamic data tables; make new id names if multiple tables"
     script = Script(f"new DataTable('#{id}')")
