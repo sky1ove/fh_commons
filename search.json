@@ -1,0 +1,632 @@
+[
+  {
+    "objectID": "tutorial_01_routes.html",
+    "href": "tutorial_01_routes.html",
+    "title": "Routes",
+    "section": "",
+    "text": "from fasthtml.common import *\nfrom fasthtml.jupyter import *\n\nfrom fh_commons.core import *\nfrom fh_commons.static import *\n\nimport json\nimport pandas as pd\nfrom math import ceil\n\n\nfrom ngrok_token import *\nurl = start_ngrok(token)\n\napp,rt = fast_app(pico=False,hdrs=hdrs)\nserver = JupyUvi(app)",
+    "crumbs": [
+      "Routes"
+    ]
+  },
+  {
+    "objectID": "tutorial_01_routes.html#setup",
+    "href": "tutorial_01_routes.html#setup",
+    "title": "Routes",
+    "section": "",
+    "text": "from fasthtml.common import *\nfrom fasthtml.jupyter import *\n\nfrom fh_commons.core import *\nfrom fh_commons.static import *\n\nimport json\nimport pandas as pd\nfrom math import ceil\n\n\nfrom ngrok_token import *\nurl = start_ngrok(token)\n\napp,rt = fast_app(pico=False,hdrs=hdrs)\nserver = JupyUvi(app)",
+    "crumbs": [
+      "Routes"
+    ]
+  },
+  {
+    "objectID": "tutorial_01_routes.html#routes",
+    "href": "tutorial_01_routes.html#routes",
+    "title": "Routes",
+    "section": "Routes",
+    "text": "Routes\n\n@rt\nBoth get and post method, function name is the route’s name\n\n@rt\ndef test():\n    return P('hi')\n\n\n\n@rt(‘/sth’)\nIf function name is get or post, then would be either of the method.\nIf function name is something else, would not change the route, but specify the route name\n\n@rt('/something')\ndef get(): return P('hi')\n\nWith params:\n\n@rt('/something/{data}')\ndef get(data:str): return P(data)\n\n\nhtmx(url,'/something/sdf')\n\n \n\n\nUse function to indicate route’s name\n\n@rt('/something')\ndef sdfsdf(req): \n    return P(req.url_for('sdfsdf'))\n\nWith route’s name\n\n@rt('/something',name='aaa')\ndef get(req): \n    return P(req.url_for('aaa'))\n\n\n\n@app.get/post\nSimilar to @rt, the function name indicates route\n\n@app.get\ndef asdf():\n    return P('hi')\n\n\n\n@app.get(‘/something’)\n\n@app.get('/user/{nm}')\ndef get_nm(nm:str): return f\"Good day to you, {nm}!\"",
+    "crumbs": [
+      "Routes"
+    ]
+  },
+  {
+    "objectID": "tutorial_01_routes.html#end",
+    "href": "tutorial_01_routes.html#end",
+    "title": "Routes",
+    "section": "End",
+    "text": "End\n\nserver.stop()\nkill_ngrok()",
+    "crumbs": [
+      "Routes"
+    ]
+  },
+  {
+    "objectID": "plot.html",
+    "href": "plot.html",
+    "title": "Plot",
+    "section": "",
+    "text": "hdrs = cond_pico_hdrs()+bootstrap_hdrs()+datatable_hdrs()+download_js()\n\n\nshow(*hdrs)\n\n\n\n\n\n\n\n\n\n\nfrom ngrok_token import *\nurl = start_ngrok(token)\nurl\n\nngrok tunnel opened at: https://b4e9-3-81-185-19.ngrok-free.app\n\n\n'https://b4e9-3-81-185-19.ngrok-free.app'\n\n\n\napp,rt = fast_app(pico=False, live=True,hdrs=hdrs)\nserver = JupyUvi(app)",
+    "crumbs": [
+      "Plot"
+    ]
+  },
+  {
+    "objectID": "plot.html#setup",
+    "href": "plot.html#setup",
+    "title": "Plot",
+    "section": "",
+    "text": "hdrs = cond_pico_hdrs()+bootstrap_hdrs()+datatable_hdrs()+download_js()\n\n\nshow(*hdrs)\n\n\n\n\n\n\n\n\n\n\nfrom ngrok_token import *\nurl = start_ngrok(token)\nurl\n\nngrok tunnel opened at: https://b4e9-3-81-185-19.ngrok-free.app\n\n\n'https://b4e9-3-81-185-19.ngrok-free.app'\n\n\n\napp,rt = fast_app(pico=False, live=True,hdrs=hdrs)\nserver = JupyUvi(app)",
+    "crumbs": [
+      "Plot"
+    ]
+  },
+  {
+    "objectID": "plot.html#svg-decorator",
+    "href": "plot.html#svg-decorator",
+    "title": "Plot",
+    "section": "SVG Decorator",
+    "text": "SVG Decorator\n\nsource\n\nfh_svg\n\n fh_svg (func)\n\nsvg to fasthtml item\nUse decorator to convert svg to fasthtml item",
+    "crumbs": [
+      "Plot"
+    ]
+  },
+  {
+    "objectID": "plot.html#heatmap",
+    "href": "plot.html#heatmap",
+    "title": "Plot",
+    "section": "Heatmap",
+    "text": "Heatmap\n\n\nfh_svg..wrapper\n\n fh_svg.&lt;locals&gt;.wrapper (*args, **kwargs)\n\n\nmatrix = np.random.rand(20, 10)\ndf = pd.DataFrame(matrix)\n\n\nplot_heatmap(df)\n\n\n\n\n \n  \n   \n    \n    2024-11-05T01:25:18.555201\n    image/svg+xml\n    \n     \n      Matplotlib v3.8.2, https://matplotlib.org/",
+    "crumbs": [
+      "Plot"
+    ]
+  },
+  {
+    "objectID": "plot.html#bar-plot",
+    "href": "plot.html#bar-plot",
+    "title": "Plot",
+    "section": "Bar plot",
+    "text": "Bar plot\n\n\nfh_svg..wrapper\n\n fh_svg.&lt;locals&gt;.wrapper (*args, **kwargs)\n\n\nmatrix = np.random.rand(7, 2)\ndf = pd.DataFrame(matrix)\n\ndf.columns = ['ctrl','exp']\n\n\nplot_bar(df,figsize=(4,2))\n\n\n\n\n \n  \n   \n    \n    2024-11-05T01:25:20.983124\n    image/svg+xml\n    \n     \n      Matplotlib v3.8.2, https://matplotlib.org/",
+    "crumbs": [
+      "Plot"
+    ]
+  },
+  {
+    "objectID": "plot.html#download-plot",
+    "href": "plot.html#download-plot",
+    "title": "Plot",
+    "section": "Download plot",
+    "text": "Download plot\n\nsource\n\ndownload_svg\n\n download_svg (*args, txt=' Plot', **kwargs)\n\nThe figure and download button has to bee placed within the same Div()\n\n@rt\ndef test():\n    return Div(download_svg(),Div(plot_bar(df,figsize=(4,2))))\n\n\nhtmx(url,'/test')",
+    "crumbs": [
+      "Plot"
+    ]
+  },
+  {
+    "objectID": "plot.html#end",
+    "href": "plot.html#end",
+    "title": "Plot",
+    "section": "End",
+    "text": "End\n\nserver.stop()\nkill_ngrok()\n\nngrok tunnel killed",
+    "crumbs": [
+      "Plot"
+    ]
+  },
+  {
+    "objectID": "basic.html",
+    "href": "basic.html",
+    "title": "Basic",
+    "section": "",
+    "text": "hdrs = bootstrap_hdrs()+download_js()+datatable_hdrs()\n\n\nshow(*hdrs)\n\n\n\n\n\n\n\n\n\nfrom ngrok_token import *\nurl = start_ngrok(token)\n\nngrok tunnel opened at: https://a223-3-238-95-91.ngrok-free.app\n\n\n\napp,rt = fast_app(pico=False,hdrs=hdrs)\nserver = JupyUvi(app)",
+    "crumbs": [
+      "Basic"
+    ]
+  },
+  {
+    "objectID": "basic.html#setup",
+    "href": "basic.html#setup",
+    "title": "Basic",
+    "section": "",
+    "text": "hdrs = bootstrap_hdrs()+download_js()+datatable_hdrs()\n\n\nshow(*hdrs)\n\n\n\n\n\n\n\n\n\nfrom ngrok_token import *\nurl = start_ngrok(token)\n\nngrok tunnel opened at: https://a223-3-238-95-91.ngrok-free.app\n\n\n\napp,rt = fast_app(pico=False,hdrs=hdrs)\nserver = JupyUvi(app)",
+    "crumbs": [
+      "Basic"
+    ]
+  },
+  {
+    "objectID": "basic.html#request",
+    "href": "basic.html#request",
+    "title": "Basic",
+    "section": "Request",
+    "text": "Request\n\nreq.url\nGet current page’s url\n\n@rt\ndef sdf(req):\n    return P(req.url)\n\n\nhtmx(url,'/sdf')\n\n \n\n\n\n\nreq.url_for\nGet original\n\n@rt\ndef sdf(req):\n    return P(req.url_for('sdf'))\n\n\nhtmx(url,'/sdf')\n\n \n\n\nWith param:\n\n# @rt(\"/api/{data}\")\n# def this(req,data:str):\n#     return req.url_for('this',data=data)\n\n\n# htmx(url,'/api/ssss')",
+    "crumbs": [
+      "Basic"
+    ]
+  },
+  {
+    "objectID": "basic.html#toasts",
+    "href": "basic.html#toasts",
+    "title": "Basic",
+    "section": "Toasts",
+    "text": "Toasts\ntoasts options: “info”, “success”, “warning”, “error”\n\nsetup_toasts(app)\n\n\n@rt\ndef test():\n    return A('click to trigger toasts',hx_get=tt,target_id='content'),Div(id='content')\n\n@rt\ndef tt(sess):\n    return add_toast(sess, \"Please upload a csv or excel file\", \"error\")\n\n\nhtmx(url,'/test')",
+    "crumbs": [
+      "Basic"
+    ]
+  },
+  {
+    "objectID": "basic.html#download-file-through-a-link",
+    "href": "basic.html#download-file-through-a-link",
+    "title": "Basic",
+    "section": "Download file through a link",
+    "text": "Download file through a link\n\n@app.get\ndef download_example():\n    return FileResponse('data/example.csv')\n\n@rt\ndef test(req):\n    return A('Download Example File', \n             href=req.url_for('download_example'), # for dynamic route\n             download='example.csv', # download file name\n            )\n\n\nhtmx(url,'/test')",
+    "crumbs": [
+      "Basic"
+    ]
+  },
+  {
+    "objectID": "basic.html#tooltip",
+    "href": "basic.html#tooltip",
+    "title": "Basic",
+    "section": "Tooltip",
+    "text": "Tooltip\n\nsource\n\nTooltip\n\n Tooltip (tooltip_content, trigger_content, element='span', **kwargs)\n\nCreate a Bootstrap tooltip\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\ntooltip_content\n\n\nFT or str\n\n\ntrigger_content\n\n\n\n\n\nelement\nstr\nspan\n\n\n\nkwargs\n\n\n\n\n\n\n\n@rt\ndef test():\n    return blank(),Tooltip(P('instruction'),'❔')\n\n\nhtmx(url,'/test')\n\n \n\n\n\nsource\n\n\nHelptip\n\n Helptip (tooltip_text=' ', trigger_content=i((),{'class': 'bi bi-\n          question-circle-fill'}), **kwargs)\n\nCreate a Bootstrap tooltip with help icon as default\n\n\n\n\n\n\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\ntooltip_text\nstr\n\nFT or str\n\n\ntrigger_content\nFT\ni((),{‘class’: ‘bi bi-question-circle-fill’})\n\n\n\nkwargs\n\n\n\n\n\n\n\n@rt\ndef test():\n    return blank(),P('Z Score',Helptip((P('sdfsdf'))))\n\n\nhtmx(url,'/test')",
+    "crumbs": [
+      "Basic"
+    ]
+  },
+  {
+    "objectID": "basic.html#table-dataframe",
+    "href": "basic.html#table-dataframe",
+    "title": "Basic",
+    "section": "Table / Dataframe",
+    "text": "Table / Dataframe\n\ndf = pd.read_csv('data/example.csv')\n\n\nsource\n\ndf2html\n\n df2html (df, tooltips=None, cls='table table-striped', id=None, **kwargs)\n\nCreate an HTML table with Bootstrap styling and tooltips\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\ndf\n\n\n\n\n\ntooltips\nNoneType\nNone\ndict\n\n\ncls\nstr\ntable table-striped\n\n\n\nid\nNoneType\nNone\n\n\n\nkwargs\n\n\n\n\n\n\n\nsource\n\n\ndownload_table\n\n download_table (*args, **kwargs)\n\nEnable table download through a download button\ndownload_table()needs to be wrapped in the same Div with the df2html\n\n@rt\ndef test():\n    # to show table correctly, always needs a container\n    return Container(\n        Div(download_table(), df2html(df,tooltips={'ID': P('ssss')}))\n    )\n\n\nhtmx(url,'/test')\n\n \n\n\n\n\nDownload invisible dataframe\n\nsource\n\n\nsend_df\n\n send_df (df, fname, href, button=button((i((),{'class': 'bi bi-\n          download'}), ' Data'),{'class': 'btn btn-outline-secondary btn-\n          sm'}))\n\n\nsource\n\n\ndownload_df\n\n download_df (dataframe, fname)\n\n\n@app.post\ndef download_file(dataframe:str, fname:str):\n    return download_df(dataframe,fname)\n\n@rt\ndef test(req):\n    download_button = send_df(df,\n                            fname='sdf.csv',\n                            href=req.url_for('download_file') # function name\n                           )\n    return download_button\n\n\nhtmx(url, '/test')\n\n \n\n\n\n\nDynamic table\n\nsource\n\n\ndynamic_table\n\n dynamic_table (df, id='dynamic_table', cls='table table-striped')\n\nDynamic data tables; make new id names if multiple tables\n\nimport numpy as np\n\n\nmatrix = np.random.rand(20, 10)\ndf = pd.DataFrame(matrix).round(2)\n\n\n@rt\ndef test():\n    return Container(dynamic_table(df))\n\n\nhtmx(url,'/test')",
+    "crumbs": [
+      "Basic"
+    ]
+  },
+  {
+    "objectID": "basic.html#pagination",
+    "href": "basic.html#pagination",
+    "title": "Basic",
+    "section": "Pagination",
+    "text": "Pagination\n\nsource\n\nget_pagination\n\n get_pagination (page, total_pages, routes)\n\nBootstrap-styled pagination with integrated page jump form\nSuppose I want a pagination bar for page 3 of 20\n\nget_pagination(3,20,'#')\n\n\n  \n    \nPrevious    \n    \nPage 3 of 20    \n    \nNext    \n    \n        \nGo    \n  \n\n\n\n\nThe above pagination can be combined with this function:\n\nsource\n\n\nget_page_index\n\n get_page_index (current_page, total_items, items_per_page=12)\n\nGet start index and end index given the current page number\nSuppose I have a list of 100 items, and I want each page have 12 items, so I need to calculate start index and end index given the current page (e.g., 2)\n\nget_page_index(2,100,12)\n\n(12, 24, 9)\n\n\nExample for a pagination:\n\nprotein_list = [str(i) for i in range(100)]\n\n\n@rt\ndef test(req, page: int = 1):\n\n    # get item index\n    start_idx, end_idx,total_pages = get_page_index(page, len(protein_list))\n\n    # get items\n    current_proteins = protein_list[start_idx:end_idx]\n    show_proteins = P(','.join(current_proteins))\n\n    # get dynamic route\n    this_routes =req.url_for('test')\n\n    # get pagination item\n    pagination = get_pagination(page,total_pages,routes=this_routes)\n\n    return show_proteins, pagination,this_routes\n\n\nhtmx(url,'/test')",
+    "crumbs": [
+      "Basic"
+    ]
+  },
+  {
+    "objectID": "basic.html#modal",
+    "href": "basic.html#modal",
+    "title": "Basic",
+    "section": "Modal",
+    "text": "Modal\n\nModal content\n\nsource\n\n\nmodal_content\n\n modal_content (title, *args)\n\n\nmodal_content('Modal content','sdfsdf')\n\n\n  \n    \n      Modal content\n    \n    sdfsdf\n  \n\n\n\n\nIt can be combined with the below to search and trigger modal\n\n\nUse form button to trigger modal\n\nsource\n\n\nmodal_form\n\n modal_form (*form_content, post, btn_text='Search', cls=None,\n             target_id='modals-window')\n\nReference: https://htmx.org/examples/modal-bootstrap/\n\n@rt\ndef page():\n    modal_send = modal_form(Input(type='text',id='input_text'),post=modal)\n    return modal_send\n\n@rt\ndef modal(input_text:str):\n    return modal_content('Modal title',input_text)\n\n\nhtmx(url,'/page')\n\n \n\n\n\n\nUse anchor link to trigger modal\n\nsource\n\n\nmodal_link\n\n modal_link (text, post, cls=None, target_id='modals-window')\n\nReference: https://htmx.org/examples/modal-bootstrap/\n\n@rt\ndef page():\n    modal_send = modal_link('click here',post=modal)\n    return modal_send\n\n@rt\ndef modal():\n    return modal_content('Modal title','sdf')\n\n\nhtmx(url,'/page')\n\n \n\n\n\n\nModal content\n\nsource\n\n\nmodal_content\n\n modal_content (title, *args)\n\n\nmodal_content('Modal content','sdfsdf')\n\n\n  \n    \n      Modal content\n    \n    sdfsdf\n  \n\n\n\n\nIt can be combined with the below to search and trigger modal\n\n\nUse form button to trigger modal\n\nsource\n\n\nmodal_form\n\n modal_form (*form_content, post, btn_text='Search', cls=None,\n             target_id='modals-window')\n\nReference: https://htmx.org/examples/modal-bootstrap/\n\n@rt\ndef page():\n    modal_send = modal_form(Input(type='text',id='input_text'),post=modal)\n    return modal_send\n\n@rt\ndef modal(input_text:str):\n    return modal_content('Modal title',input_text)\n\n\nhtmx(url,'/page')\n\n \n\n\n\n\nUse anchor link to trigger modal\n\nsource\n\n\nmodal_link\n\n modal_link (text, post, cls=None, target_id='modals-window')\n\nReference: https://htmx.org/examples/modal-bootstrap/\n\n@rt\ndef page():\n    modal_send = modal_link('click here',post=modal)\n    return modal_send\n\n@rt\ndef modal():\n    return modal_content('Modal title','sdf')\n\n\nhtmx(url,'/page')\n\n \n\n\n\nsource\n\n\nget_spinner\n\n get_spinner (id, cls='d-flex justify-content-center')\n\n\nget_spinner(id='sdf')\n\n\n  \nLoading...  \n\n\n\n\nExample:\n\n# @app.post\n# def example():\n#     ...\n#     send_select = Form(\n#             Hidden(value=df.to_json(),id='upload_df'),\n#             Div(select_list,button,cls='row g-2 align-items-center'),\n#             post=calculate,\n#             target_id='result',\n#             hx_indicator='#spinner',\n#         )\n    \n#     spinner=get_spinner(id='spinner')\n    \n#     return send_select, spinner, ...",
+    "crumbs": [
+      "Basic"
+    ]
+  },
+  {
+    "objectID": "basic.html#end",
+    "href": "basic.html#end",
+    "title": "Basic",
+    "section": "End",
+    "text": "End\n\nserver.stop()\nkill_ngrok()\n\nngrok tunnel killed",
+    "crumbs": [
+      "Basic"
+    ]
+  },
+  {
+    "objectID": "protein.html",
+    "href": "protein.html",
+    "title": "Protein display",
+    "section": "",
+    "text": "source\n\n\n\n AF_display ()\n\nclient side scripts\n\nsource\n\n\n\n\n pdbe_molstar ()\n\nHeaders\n\nhdrs = bootstrap_hdrs() + pdbe_molstar()\n\n\nshow(*hdrs)\n\n\n\n\n\n\n\n\n\nfrom ngrok_token import *\nurl = start_ngrok(token)\n\nngrok tunnel opened at: https://9771-3-91-16-70.ngrok-free.app\n\n\n\napp,rt = fast_app(pico=False,hdrs=hdrs)\nserver = JupyUvi(app)",
+    "crumbs": [
+      "Protein display"
+    ]
+  },
+  {
+    "objectID": "protein.html#setup",
+    "href": "protein.html#setup",
+    "title": "Protein display",
+    "section": "",
+    "text": "source\n\n\n\n AF_display ()\n\nclient side scripts\n\nsource\n\n\n\n\n pdbe_molstar ()\n\nHeaders\n\nhdrs = bootstrap_hdrs() + pdbe_molstar()\n\n\nshow(*hdrs)\n\n\n\n\n\n\n\n\n\nfrom ngrok_token import *\nurl = start_ngrok(token)\n\nngrok tunnel opened at: https://9771-3-91-16-70.ngrok-free.app\n\n\n\napp,rt = fast_app(pico=False,hdrs=hdrs)\nserver = JupyUvi(app)",
+    "crumbs": [
+      "Protein display"
+    ]
+  },
+  {
+    "objectID": "protein.html#check-output-format",
+    "href": "protein.html#check-output-format",
+    "title": "Protein display",
+    "section": "Check output format",
+    "text": "Check output format\n\ndf = pd.read_parquet('data/AM.parquet')\n\n\n@rt\ndef test():\n    form = Form(Input(id='uniprot_id'),Button('load'),hx_get='/sdf',target_id='result')\n    result = Div(id='result')\n    return Div(form, result)\n\n@rt\ndef sdf(uniprot_id:str):\n    protein_data = df[df['uniprot'] == uniprot_id].copy()\n\n    if protein_data.empty:\n        return Div('Uniprot id not found in the phosphosite database')\n\n    protein_data['residue'] = protein_data.site.str[1:].astype(int)\n    protein_data['CDDM_kinases'] = protein_data['CDDM'].str.split(',').str[:5]\n    protein_data['PSPA_kinases'] = protein_data['PSPA'].str.split(',').str[:5]\n    protein_data['AM_pathogenicity'] = protein_data['AM_pathogenicity'].round(4)\n\n    # Convert the filtered data to a list of dictionaries\n    # It needs to include residue, as it uses residue number to highlight\n    out = protein_data[['residue', 'AM_pathogenicity','site_seq','source','CDDM_kinases','PSPA_kinases']]\n\n    return Container(df2html(out))\n\n\nhtmx(url,'/sdf?uniprot_id=P10398')",
+    "crumbs": [
+      "Protein display"
+    ]
+  },
+  {
+    "objectID": "protein.html#protein-display",
+    "href": "protein.html#protein-display",
+    "title": "Protein display",
+    "section": "Protein Display",
+    "text": "Protein Display\nP10398 P35222\nKey listeners:\n\nuniprot_id: input text\nload-protein-btn: click to load new protein\nmyViewer: display protein\nAF_view: control alphafold color on or off\n\n\n@rt('/')\ndef get():\n    form = Form(\n        Input(type='text', id = 'uniprot_id', placeholder='Enter Uniprot ID (e.g., P10398)'),\n        Button('Load Protein', type='button',id='load-protein-btn'),\n        id='protein-form',\n    )\n    viewer = Div(id='myViewer')\n    # script = Script(src=\"./imports/alphafold_display.js\")\n    AF_button = Button('Turn On/Off Alphafold Color', type='button',id='AF_view'),\n    blank=Div(style='height: 600px;')\n\n    return Titled('PDBe Mol* JS Plugin Demo - AlphaFold View', form, AF_button, viewer, AF_script, blank)\n\n\n@rt('/api/protein/{uniprot_id}')\ndef get(uniprot_id: str):\n    # Filter the dataframe for the given UniProt ID\n    protein_data = df[df['uniprot'] == uniprot_id].copy()\n\n    if protein_data.empty:\n        return {'error': 'Uniprot id not found in the phosphosite database'}\n\n    protein_data['residue'] = protein_data.site.str[1:].astype(int)\n    protein_data['CDDM_kinases'] = protein_data['CDDM'].str.split(',').str[:5]\n    protein_data['PSPA_kinases'] = protein_data['PSPA'].str.split(',').str[:5]\n    protein_data['AM_pathogenicity'] = protein_data['AM_pathogenicity'].round(4)\n\n    # Convert the filtered data to a list of dictionaries\n    # It needs to include residue, as it uses residue number to highlight\n    site_data = protein_data[['residue', 'AM_pathogenicity','site_seq','source','CDDM_kinases','PSPA_kinases']].to_dict('records')\n\n    return {'site_data': site_data}\n\n\nhtmx(url,'/')",
+    "crumbs": [
+      "Protein display"
+    ]
+  },
+  {
+    "objectID": "protein.html#end",
+    "href": "protein.html#end",
+    "title": "Protein display",
+    "section": "End",
+    "text": "End\n\nserver.stop()\nkill_ngrok()\n\nngrok tunnel killed",
+    "crumbs": [
+      "Protein display"
+    ]
+  },
+  {
+    "objectID": "core.html#headers",
+    "href": "core.html#headers",
+    "title": "Core",
+    "section": "Headers",
+    "text": "Headers\n\ncss, javascripts\n\n\nBootstrap\n\ntooltip_js = Script(\"\"\"\n        document.addEventListener('htmx:load', function() {\n            var tooltipTriggerList = document.querySelectorAll('[data-bs-toggle=\"tooltip\"]');\n            var tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl =&gt; new bootstrap.Tooltip(tooltipTriggerEl));\n        });\n    \"\"\")\n\n\nsource\n\n\nbootstrap_hdrs\n\n bootstrap_hdrs (include_icon=True, include_tooltip=True)\n\n\n\nDatatables for dynamic table\n\nsource\n\n\ndatatable_hdrs\n\n datatable_hdrs ()\n\n\n\nConditional Pico\n\nsource\n\n\ncond_pico_hdrs\n\n cond_pico_hdrs ()\n\n\n\nCopy TextArea js\n\nsource\n\n\ncopy_js\n\n copy_js ()\n\n\n\nAutocomplete js\n\nsource\n\n\nautocomplete_js\n\n autocomplete_js ()\n\n\n\nDownload csv/svg js\n\nsource\n\n\ndownload_js\n\n download_js ()",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "core.html#show-in-cell-magic",
+    "href": "core.html#show-in-cell-magic",
+    "title": "Core",
+    "section": "show() in cell magic",
+    "text": "show() in cell magic\nFasthtml updates in the latest version that in jupyter notebook, no need to use show() when importing fasthtml.jupyter\n\nsource\n\ns\n\n s (line, cell)\n\nUse %%s in a cell, so that you don’t have to wrap everything in show()\n\nP('sdf')\n\nsdf",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "core.html#jupyter-live-on-colab",
+    "href": "core.html#jupyter-live-on-colab",
+    "title": "Core",
+    "section": "Jupyter live on colab",
+    "text": "Jupyter live on colab\n\nInitiate ngrok tunnel\n\nget public url that connect to localhost:8000\n\n\nsource\n\n\nstart_ngrok\n\n start_ngrok (token, port=8000)\n\n\nsource\n\n\nkill_ngrok\n\n kill_ngrok ()\n\nDisconnect the specified ngrok url\nFind ngrok token in https://dashboard.ngrok.com/get-started/your-authtoken\n\n# ask users to type ngrok token\n# from getpass import getpass\n# token = getpass(\"Type your token: \")\n\n# or directly import token variable \nfrom ngrok_token import *\n\nurl = start_ngrok(token)\n\nngrok tunnel opened at: https://4a67-3-81-185-19.ngrok-free.app\n\n\n\n\nShow Live page in jupyter cell\n\nsource\n\n\nhtmx\n\n htmx (url, path='')\n\nAn iframe which displays the HTMX application in a notebook.\nExample:\n\n# url = start_ngrok(YOUR_NGROK_TOKEN)\napp,rt = fast_app(live=True)\nserver = JupyUvi(app)\n\n\n\n\n\n\n@rt\ndef index():\n    return Titled('Hello, Jupyter',\n           P('Welcome to the FastHTML + Jupyter example'),\n           Button('Click', hx_get='/click', hx_target='#dest'),\n           Div(id='dest')\n    )\n\n@app.get\ndef click():\n    return P('Hi')\n\n\nhtmx(url,'/') # click `visit site`\n\n \n\n\n\n\npush() in cell magic\n\nsource\n\n\np\n\n p (line, cell)\n\nInstead of wrapping everything in push, use %%p in a cell to do the same thing\n\n# url = start_ngrok(YOUR_NGROK_TOKEN)\n# app,rt = fast_app(exts='ws', live=True)\n# server = JupyUvi(app) # JupyUvi is replaced with ws_client and setup_ws in the latest version\n# push = Pusher(app)\n\n# @app.get\n# def click():\n#     return P('hi')\n\n# %%p\n# A('click',hx_get='/click',hx_target='#dest'),Div(id='dest')\n\n# HTMX_public(url)\n\n# server.stop()\n\n\nserver.stop()\nkill_ngrok()\n\nngrok tunnel killed",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "fh_commons",
+    "section": "",
+    "text": "Install latest from the GitHub:\n$ pip install git+https://github.com/sky1ove/fh_commons.git",
+    "crumbs": [
+      "fh_commons"
+    ]
+  },
+  {
+    "objectID": "index.html#installation",
+    "href": "index.html#installation",
+    "title": "fh_commons",
+    "section": "",
+    "text": "Install latest from the GitHub:\n$ pip install git+https://github.com/sky1ove/fh_commons.git",
+    "crumbs": [
+      "fh_commons"
+    ]
+  },
+  {
+    "objectID": "index.html#documentation",
+    "href": "index.html#documentation",
+    "title": "fh_commons",
+    "section": "Documentation",
+    "text": "Documentation\n\nTo check source code with examples, go to nbs folder to check notebooks.\nDocumentation is hosted on: https://sky1ove.github.io/fh_commons/",
+    "crumbs": [
+      "fh_commons"
+    ]
+  },
+  {
+    "objectID": "index.html#how-to-use",
+    "href": "index.html#how-to-use",
+    "title": "fh_commons",
+    "section": "How to use",
+    "text": "How to use\n\nfrom fasthtml.common import *\nfrom fasthtml.jupyter import *\n\nfrom fh_commons.static import *\nfrom fh_commons.core import *\n\n\nfrom getpass import getpass\ntoken = getpass(\"Type your ngrok token: \")\n\nurl = start_ngrok(token)\n\napp,rt = fast_app(live=True)\nserver = JupyUvi(app)\n\n\n@rt\ndef test():\n    return Titled('hi')\n\nhtmx(url,'/test')\n\nShut down server and kill ngrok terminal:\n\nserver.stop()\nkill_ngrok()",
+    "crumbs": [
+      "fh_commons"
+    ]
+  },
+  {
+    "objectID": "form.html",
+    "href": "form.html",
+    "title": "Form",
+    "section": "",
+    "text": "hdrs = bootstrap_hdrs()+download_js()+datatable_hdrs()\n\n\nshow(*hdrs)\n\n\n\n\n\n\n\n\n\nfrom ngrok_token import *\nurl = start_ngrok(token)\n\nngrok tunnel opened at: https://a223-3-238-95-91.ngrok-free.app\n\n\n\napp,rt = fast_app(pico=False,hdrs=hdrs)\nserver = JupyUvi(app)",
+    "crumbs": [
+      "Form"
+    ]
+  },
+  {
+    "objectID": "form.html#setup",
+    "href": "form.html#setup",
+    "title": "Form",
+    "section": "",
+    "text": "hdrs = bootstrap_hdrs()+download_js()+datatable_hdrs()\n\n\nshow(*hdrs)\n\n\n\n\n\n\n\n\n\nfrom ngrok_token import *\nurl = start_ngrok(token)\n\nngrok tunnel opened at: https://a223-3-238-95-91.ngrok-free.app\n\n\n\napp,rt = fast_app(pico=False,hdrs=hdrs)\nserver = JupyUvi(app)",
+    "crumbs": [
+      "Form"
+    ]
+  },
+  {
+    "objectID": "form.html#file-upload-receive",
+    "href": "form.html#file-upload-receive",
+    "title": "Form",
+    "section": "File upload & receive",
+    "text": "File upload & receive\n\nUpload csv/excel file\n\nsource\n\n\nget_file_input\n\n get_file_input (label_text, id, **kwargs)\n\n\nget_file_input('Select csv/excel for upload',id='sdf')\n\nSelect csv/excel for upload  \n\n\n\n\n\nReceive file\n\nsource\n\n\nbytes2df\n\n bytes2df (bytes_data, file_type)\n\n\n\nExample\n\n@rt\ndef file_upload(req):\n    add = get_file_input(\n        'Upload your csv or excel',\n        id='myFile',post=preview, target_id='content',hx_trigger='change')\n    \n    example_file = A(Small('Download Example File'), href=req.url_for('download_example'),download='example.csv')\n    \n    return Group(add,example_file), Div(id='content')\n\n@app.get\ndef download_example():\n    return FileResponse('data/example.csv')\n\n@app.post\nasync def preview(sess, myFile:UploadFile):\n    filename = myFile.filename\n\n    if filename.endswith('.csv'):\n        file_type = 'csv'\n    elif filename.endswith(('.xls', '.xlsx')):\n        file_type = 'excel'\n    else:\n        return add_toast(sess, \"Please upload a csv or excel file\", \"error\")\n        \n    # Data as byte string\n    bytes_data = await myFile.read()\n    df = bytes2df(bytes_data,file_type)\n    \n    if len(df)&gt;100_000:\n        return add_toast(sess, \"Exceed 100,000 lines, please use python api for large file\", \"warning\")\n    \n    return df2html(df.head())\n\n\nhtmx(url,'/file_upload')",
+    "crumbs": [
+      "Form"
+    ]
+  },
+  {
+    "objectID": "form.html#input-text",
+    "href": "form.html#input-text",
+    "title": "Form",
+    "section": "Input text",
+    "text": "Input text\n\nsource\n\nget_input\n\n get_input (label_text, id, cls=None, type='text', **kwargs)\n\n\nget_input('Gene ID',id='aa')\n\n  \nGene ID\n\n\n\nsource\n\n\nget_button\n\n get_button (text, cls, **kwargs)\n\n\nForm(get_input('sdf','a',cls='col-3'),get_button('aaa',cls='col-1'),cls='row g-2')\n\n    \nsdfaaa\n\n\n\nsource\n\n\nget_input_list\n\n get_input_list (label_text, input_list, id, cls=None, type='text',\n                 **kwargs)\n\n\nget_input_list('Select item', ['a','b','c','d'],id='select')\n\n\n  \nSelect item  \n    a\n    b\n    c\n    d",
+    "crumbs": [
+      "Form"
+    ]
+  },
+  {
+    "objectID": "form.html#textarea",
+    "href": "form.html#textarea",
+    "title": "Form",
+    "section": "TextArea",
+    "text": "TextArea\n\nTextarea(id='s', placeholder='sdf', cls='form-control',rows=10)",
+    "crumbs": [
+      "Form"
+    ]
+  },
+  {
+    "objectID": "form.html#select-default-is-first",
+    "href": "form.html#select-default-is-first",
+    "title": "Form",
+    "section": "Select (default is first)",
+    "text": "Select (default is first)\n\nsource\n\nget_select\n\n get_select (label_text, option_list, id, cls=None, **kwargs)\n\nThe first item in the option_list is the default",
+    "crumbs": [
+      "Form"
+    ]
+  },
+  {
+    "objectID": "form.html#select",
+    "href": "form.html#select",
+    "title": "Form",
+    "section": "Select",
+    "text": "Select\n\nsource\n\nget_select_simple\n\n get_select_simple (label_text, select_list, id, cls=None)\n\n\nget_select_simple('select one', ['a','b','c'],id='ssdf')\n\n\nselect oneabc",
+    "crumbs": [
+      "Form"
+    ]
+  },
+  {
+    "objectID": "form.html#select-multiple",
+    "href": "form.html#select-multiple",
+    "title": "Form",
+    "section": "Select multiple",
+    "text": "Select multiple\n\nsource\n\nget_select_simple_multiple\n\n get_select_simple_multiple (label_text, select_list, id, cls=None)\n\n\nget_select_simple_multiple('select one', ['a','b','c'],id='ssss')\n\n\nselect oneabc",
+    "crumbs": [
+      "Form"
+    ]
+  },
+  {
+    "objectID": "form.html#spinner",
+    "href": "form.html#spinner",
+    "title": "Form",
+    "section": "Spinner",
+    "text": "Spinner\n\nsource\n\nget_spinner\n\n get_spinner (id, cls='d-flex justify-content-center')\n\n\nget_spinner(id='sdf')\n\n\n  \nLoading...  \n\n\n\n\nExample:\n\n# @app.post\n# def example():\n#     ...\n#     send_select = Form(\n#             Hidden(value=df.to_json(),id='upload_df'),\n#             Div(select_list,button,cls='row g-2 align-items-center'),\n#             post=calculate,\n#             target_id='result',\n#             hx_indicator='#spinner',\n#         )\n    \n#     spinner=get_spinner(id='spinner')\n    \n#     return send_select, spinner, ...",
+    "crumbs": [
+      "Form"
+    ]
+  },
+  {
+    "objectID": "form.html#end",
+    "href": "form.html#end",
+    "title": "Form",
+    "section": "End",
+    "text": "End\n\nserver.stop()\nkill_ngrok()\n\nngrok tunnel killed",
+    "crumbs": [
+      "Form"
+    ]
+  },
+  {
+    "objectID": "pico.html",
+    "href": "pico.html",
+    "title": "Pico FT",
+    "section": "",
+    "text": "PicoCSS: https://picocss.com/docs",
+    "crumbs": [
+      "Pico FT"
+    ]
+  },
+  {
+    "objectID": "pico.html#setup",
+    "href": "pico.html#setup",
+    "title": "Pico FT",
+    "section": "Setup",
+    "text": "Setup\n\npico_hdrs = Link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css')\n\n\n# show(pico_hdrs)",
+    "crumbs": [
+      "Pico FT"
+    ]
+  },
+  {
+    "objectID": "pico.html#navigation-bar",
+    "href": "pico.html#navigation-bar",
+    "title": "Pico FT",
+    "section": "Navigation bar",
+    "text": "Navigation bar\n\nsource\n\nNavbar\n\n Navbar (page)\n\nPico nav bar\n\nNavbar('subpage')\n\n\n  \n    \nHome    \n    \nsubpage",
+    "crumbs": [
+      "Pico FT"
+    ]
+  },
+  {
+    "objectID": "pico.html#accordian",
+    "href": "pico.html#accordian",
+    "title": "Pico FT",
+    "section": "Accordian",
+    "text": "Accordian\n\nsource\n\nget_accordian\n\n get_accordian (title, context)\n\nclickable expand\n\nget_accordian('Check details', P('sdfwef'))\n\nCheck details  \n    sdfwef",
+    "crumbs": [
+      "Pico FT"
+    ]
+  },
+  {
+    "objectID": "pico.html#card",
+    "href": "pico.html#card",
+    "title": "Pico FT",
+    "section": "Card",
+    "text": "Card\n\nCard('body', P('sdf'),header='sdf',footer='sdfdsf')\n\n\n  sdf\nbody  sdf\n  sdfdsf",
+    "crumbs": [
+      "Pico FT"
+    ]
+  },
+  {
+    "objectID": "pico.html#end",
+    "href": "pico.html#end",
+    "title": "Pico FT",
+    "section": "End",
+    "text": "End",
+    "crumbs": [
+      "Pico FT"
+    ]
+  },
+  {
+    "objectID": "static.html",
+    "href": "static.html",
+    "title": "Static components",
+    "section": "",
+    "text": "hdrs = cond_pico_hdrs()+bootstrap_hdrs()\n\n\nshow(*hdrs)",
+    "crumbs": [
+      "Static components"
+    ]
+  },
+  {
+    "objectID": "static.html#setup",
+    "href": "static.html#setup",
+    "title": "Static components",
+    "section": "",
+    "text": "hdrs = cond_pico_hdrs()+bootstrap_hdrs()\n\n\nshow(*hdrs)",
+    "crumbs": [
+      "Static components"
+    ]
+  },
+  {
+    "objectID": "static.html#blank",
+    "href": "static.html#blank",
+    "title": "Static components",
+    "section": "Blank",
+    "text": "Blank\n\nsource\n\nblank\n\n blank (height=50)\n\nFor styles\n\nblank(50)",
+    "crumbs": [
+      "Static components"
+    ]
+  },
+  {
+    "objectID": "static.html#border",
+    "href": "static.html#border",
+    "title": "Static components",
+    "section": "Border",
+    "text": "Border\n\nsource\n\nborder\n\n border (height=None)\n\n\nborder()",
+    "crumbs": [
+      "Static components"
+    ]
+  },
+  {
+    "objectID": "static.html#remove-blanks-in-input",
+    "href": "static.html#remove-blanks-in-input",
+    "title": "Static components",
+    "section": "Remove blanks in input",
+    "text": "Remove blanks in input\n\nsource\n\nformat_input\n\n format_input (txt, upper=True)\n\n\nformat_input('s s k')\n\n'SSK'",
+    "crumbs": [
+      "Static components"
+    ]
+  },
+  {
+    "objectID": "static.html#conditional-pico",
+    "href": "static.html#conditional-pico",
+    "title": "Static components",
+    "section": "Conditional Pico",
+    "text": "Conditional Pico\n\nsource\n\nPico\n\n Pico (*args, cls='pico', **kwargs)\n\nPico conditional Div\n\nPico(H5('hi'))\n\n\n  hi",
+    "crumbs": [
+      "Static components"
+    ]
+  },
+  {
+    "objectID": "static.html#pico_titled",
+    "href": "static.html#pico_titled",
+    "title": "Static components",
+    "section": "Pico_Titled",
+    "text": "Pico_Titled\n\nPico titled with everything else unPico\n\n\nsource\n\nPico_Titled\n\n Pico_Titled (title, *args, cls='container', **kwargs)\n\nPico titled with everything else unPico\n\nPico_Titled('hello',P('sdf'))\n\nhello\n  \n    hello\n  \n  sdf",
+    "crumbs": [
+      "Static components"
+    ]
+  },
+  {
+    "objectID": "static.html#navigation-bar",
+    "href": "static.html#navigation-bar",
+    "title": "Static components",
+    "section": "Navigation bar",
+    "text": "Navigation bar\n\nsource\n\nget_nav\n\n get_nav (title, href='#')\n\n\nnav = get_nav('Home')\nnav\n\n\n  \nHome",
+    "crumbs": [
+      "Static components"
+    ]
+  },
+  {
+    "objectID": "static.html#navigation-titled",
+    "href": "static.html#navigation-titled",
+    "title": "Static components",
+    "section": "Navigation + titled",
+    "text": "Navigation + titled\n\nsource\n\nNavTitled\n\n NavTitled (navbar, title, *args, cls='container', **kwargs)\n\nNavbar + Pico titled with everything else unPico\n\nNavTitled(nav,'sdf')\n\nsdf\n  \n    \nHome    \n  \n  \n    \n    \n      sdf",
+    "crumbs": [
+      "Static components"
+    ]
+  },
+  {
+    "objectID": "static.html#tabs",
+    "href": "static.html#tabs",
+    "title": "Static components",
+    "section": "Tabs",
+    "text": "Tabs\n\nsource\n\nget_tab\n\n get_tab (data_dict, prefix='')\n\nCreate a bootstrap tab structure with optional prefix for unique IDs and handle spaces in tab names\n\nget_tab({'Tab1':P('content'),\n         'Tab2':P('content')})\n\n\n  \n    \nTab1    \n    \nTab2    \n  \n  \n    \n      \n      content\n    \n    \n      \n      content",
+    "crumbs": [
+      "Static components"
+    ]
+  },
+  {
+    "objectID": "static.html#accordian",
+    "href": "static.html#accordian",
+    "title": "Static components",
+    "section": "Accordian",
+    "text": "Accordian\n\nsource\n\nget_accordian\n\n get_accordian (data_dict)\n\nBootstrap accordian\n\nget_accordian({'Tab1':P('content'),\n               'Tab2':P('content')})\n\n\n  \n    \nTab1    \n    \n      \n        content\n      \n    \n  \n  \n    \nTab2    \n    \n      \n        content",
+    "crumbs": [
+      "Static components"
+    ]
+  },
+  {
+    "objectID": "static.html#download-button",
+    "href": "static.html#download-button",
+    "title": "Static components",
+    "section": "Download Button",
+    "text": "Download Button\n\nsource\n\ndownload_button\n\n download_button (*args, **kwargs)\n\n\ndownload_button(' Download')\n\n Download",
+    "crumbs": [
+      "Static components"
+    ]
+  },
+  {
+    "objectID": "static.html#card",
+    "href": "static.html#card",
+    "title": "Static components",
+    "section": "Card",
+    "text": "Card\n\nsource\n\nget_card\n\n get_card (img_pth, title, description, link='#', img_height=200,\n           txt_height=150, card_width=22)\n\nCard with link; make sure outside Div has cls = ‘row’\n\nget_card('./data/card_plot.png','Universe','sdfsdfsdf',link='#')\n\n\n  \n    \n    \n    \n      Universe\n      sdfsdfsdf",
+    "crumbs": [
+      "Static components"
+    ]
+  },
+  {
+    "objectID": "static.html#end",
+    "href": "static.html#end",
+    "title": "Static components",
+    "section": "End",
+    "text": "End",
+    "crumbs": [
+      "Static components"
+    ]
+  }
+]
