@@ -16,14 +16,26 @@ from IPython import get_ipython
 from IPython.core.magic import register_cell_magic
 import ast
 
-# %% ../nbs/00_core.ipynb 6
-def bootstrap_hdrs(include_icon=True):
+# %% ../nbs/00_core.ipynb 7
+def bootstrap_hdrs(include_icon=True,include_tooltip=True):
     css = Link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css', rel='stylesheet')
     js = Script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js')
-    icon = Link(href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css', rel='stylesheet')
-    return [css,js,icon] if include_icon else [css,js]
+    
+    bootstrap_list = [css,js]
+    if include_icon:
+        icon = Link(href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css', rel='stylesheet')
+        bootstrap_list.append(icon)
+    if include_tooltip:
+        tooltip_js = Script("""
+            document.addEventListener('htmx:load', function() {
+                var tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+                var tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+            });
+        """)
+        bootstrap_list.append(tooltip_js)
+    return bootstrap_list
 
-# %% ../nbs/00_core.ipynb 8
+# %% ../nbs/00_core.ipynb 9
 def datatable_hdrs():
     dt_s1 = Script(src='https://code.jquery.com/jquery-3.7.1.js')
     dt_s2 = Script(src='https://cdn.datatables.net/2.1.5/js/dataTables.js')
@@ -32,28 +44,28 @@ def datatable_hdrs():
     dt_c2 = Link(rel='stylesheet',href='https://cdn.datatables.net/2.1.5/css/dataTables.bootstrap5.css')
     return [dt_s1,dt_s2,dt_s3,dt_c1,dt_c2]
 
-# %% ../nbs/00_core.ipynb 10
+# %% ../nbs/00_core.ipynb 11
 def cond_pico_hdrs():
     conditional_pico = Link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css')
     return [conditional_pico]
 
-# %% ../nbs/00_core.ipynb 12
+# %% ../nbs/00_core.ipynb 13
 def copy_js():
     script_copy_button=Script(src="./imports/copy_button.js")
     return [script_copy_button]
 
-# %% ../nbs/00_core.ipynb 14
+# %% ../nbs/00_core.ipynb 15
 def autocomplete_js():
     jquery = Script(src='https://code.jquery.com/jquery-3.6.0.min.js')
     script_autocomplete = Script(src='./imports/autocomplete.js')
     return [jquery,script_autocomplete]
 
-# %% ../nbs/00_core.ipynb 16
+# %% ../nbs/00_core.ipynb 17
 def download_js():
     download_script = Script(src='./imports/download_csv_svg.js')
     return [download_script]
 
-# %% ../nbs/00_core.ipynb 19
+# %% ../nbs/00_core.ipynb 20
 @register_cell_magic
 def s(line, cell):
     # Parse the line argument to check for a 'debug' flag
@@ -88,7 +100,7 @@ def s(line, cell):
     # Execute the modified code
     get_ipython().run_cell(modified_code)
 
-# %% ../nbs/00_core.ipynb 24
+# %% ../nbs/00_core.ipynb 25
 def start_ngrok(token,port=8000):
     
     # Get token from ngrok.com --> login --> Your Authtoken
@@ -103,23 +115,23 @@ def start_ngrok(token,port=8000):
     # Return the public URL
     return public_url
 
-# %% ../nbs/00_core.ipynb 25
+# %% ../nbs/00_core.ipynb 26
 def kill_ngrok():
     "Disconnect the specified ngrok url"
     ngrok.kill()
     print("ngrok tunnel killed")
 
-# %% ../nbs/00_core.ipynb 29
-def htmx(url,path='',height='auto'):
+# %% ../nbs/00_core.ipynb 30
+def htmx(url,path=''):
     "An iframe which displays the HTMX application in a notebook."
-    return HTML(f'<iframe src="{url}{str(path)}" style="width: 100%; height: {height}; border: none;" ' + """onload="{
+    return HTML(f'<iframe src="{url}{str(path)}" style="width: 100%; height: auto; border: none;" ' + """onload="{
         let frame = this;
         window.addEventListener('message', function(e) {
             if (e.data.height) frame.style.height = (e.data.height+1) + 'px';
         }, false);
     }" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write; display-capture; encrypted-media; fullscreen; gamepad; geolocation; gyroscope; hid; identity-credentials-get; idle-detection; magnetometer; microphone; midi; payment; picture-in-picture; publickey-credentials-get; screen-wake-lock; serial; usb; web-share; xr-spatial-tracking"></iframe> """)
 
-# %% ../nbs/00_core.ipynb 35
+# %% ../nbs/00_core.ipynb 36
 @register_cell_magic
 def p(line, cell):
     # Parse the line argument to check for a 'debug' flag
